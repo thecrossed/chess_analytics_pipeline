@@ -62,7 +62,7 @@ def get_user_rapid_current_rating(username,
     retrive_time = now = datetime.utcnow().strftime("%b %d %Y %H:%M:%S")
     return rapid_rating, retrive_time
 
-def rating_collect(student_list):
+def rating_collect():
     students = lowercase_student(students_username)
     ratings = []
     retrieve_time = []
