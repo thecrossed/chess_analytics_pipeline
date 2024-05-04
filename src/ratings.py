@@ -92,13 +92,13 @@ def to_pandas_rating(fetched_data):
     """
     df = pd.DataFrame()
     df['username'] = fetched_data[0]
-    #df['rapid_rating'] = fetched_data[1]
-    #df['collect_time'] = fetched_data[2]
-    #df = df.astype('str')
-    #df['rapid_rating'] = df['rapid_rating'].astype('int')
-    #df['collect_time'] = pd.to_datetime(df['collect_time'])
+    df['rapid_rating'] = fetched_data[1]
+    df['collect_time'] = fetched_data[2]
+    df = df.astype('str')
+    df['rapid_rating'] = df['rapid_rating'].astype('int')
+    df['collect_time'] = pd.to_datetime(df['collect_time'])
     df = df.drop_duplicates()
-    #df = df.sort_values(by = ['rapid_rating','collect_time'], ascending = [False,False])
+    df = df.sort_values(by = ['rapid_rating','collect_time'], ascending = [False,False])
     
     return df
 
