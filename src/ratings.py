@@ -3,7 +3,6 @@ from datetime import date
 from datetime import datetime
 import json
 from dateutil.relativedelta import relativedelta
-import pgn
 import pandas as pd
 
 # student data - will be transferred to database
