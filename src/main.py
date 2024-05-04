@@ -32,18 +32,20 @@ def main():
     print(df.head(5))
     g.upload_df("2023fall_game", df, '1YbU3GZq58mWu5Kl4l4gPhq96aohmk8gFxbzGr6cpA7o')
 
+    """
     collected_move = data.move_data_collect()
     df_move = g.to_pandas_move(collected_move)
     print("move is converted into pandas")
     g.upload_df("2023fall_move", df_move, '1YbU3GZq58mWu5Kl4l4gPhq96aohmk8gFxbzGr6cpA7o')
-
+    """
+    
     rating = ratings.rating_collect()
     df_rating = ratings.to_pandas_rating(rating)
     print("rating is converted into pandas")
     print(df_rating.head(5))
     #g.upload_df("2023fall_game", df, '1YbU3GZq58mWu5Kl4l4gPhq96aohmk8gFxbzGr6cpA7o')
     #g.upload_df("rcc_rating", df, '1YbU3GZq58mWu5Kl4l4gPhq96aohmk8gFxbzGr6cpA7o')
-    g.upload_df("2023fall_game", df_rating, '1YbU3GZq58mWu5Kl4l4gPhq96aohmk8gFxbzGr6cpA7o')
+    g.upload_df("2024_summer_rating", df_rating, '1YbU3GZq58mWu5Kl4l4gPhq96aohmk8gFxbzGr6cpA7o')
 
 if __name__ == "__main__":
     main()
