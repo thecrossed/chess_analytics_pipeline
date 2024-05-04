@@ -39,7 +39,7 @@ def main():
     rating = ratings.rating_collect()
     df_rating = ratings.to_pandas_rating(rating)
     print("rating is converted into pandas")
-    g.upload_df("rcc_rating", df, '1YbU3GZq58mWu5Kl4l4gPhq96aohmk8gFxbzGr6cpA7o')
+    g.upload_df("rcc_rating", df_rating, '1YbU3GZq58mWu5Kl4l4gPhq96aohmk8gFxbzGr6cpA7o')
 
 if __name__ == "__main__":
     main()
