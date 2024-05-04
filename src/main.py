@@ -20,6 +20,7 @@ import sys
 import chess_dot_com_api as capi
 import googlesheet as g
 import data
+import ratings
 from pgn_parser import pgn, parser
 
     
@@ -34,7 +35,12 @@ def main():
     df_move = g.to_pandas_move(collected_move)
     print("move is converted into pandas")
     g.upload_df("2023fall_move", df_move, '1YbU3GZq58mWu5Kl4l4gPhq96aohmk8gFxbzGr6cpA7o')
-    
+
+    rating = ratings.rating_collect()
+    df_rating = ratings.to_pandas_rating(rating)
+    print("rating is converted into pandas")
+    g.upload_df("rcc_rating", df, '1YbU3GZq58mWu5Kl4l4gPhq96aohmk8gFxbzGr6cpA7o')
+
 if __name__ == "__main__":
     main()
 
