@@ -69,7 +69,7 @@ def rating_collect():
         print(student)
         ratings.append(get_user_rapid_current_rating(student)[0])
         retrieve_time.append(get_user_rapid_current_rating(student)[1])
-    return student_list, ratings, retrieve_time
+    return students, ratings, retrieve_time
 
 def lowercase_student(student_list):
     """
