@@ -45,7 +45,8 @@ def main():
     print(df_rating.head(5))
     #g.upload_df("2023fall_game", df, '1YbU3GZq58mWu5Kl4l4gPhq96aohmk8gFxbzGr6cpA7o')
     #g.upload_df("rcc_rating", df, '1YbU3GZq58mWu5Kl4l4gPhq96aohmk8gFxbzGr6cpA7o')
-    g.upload_df("2024_summer_rating", df_rating, '1YbU3GZq58mWu5Kl4l4gPhq96aohmk8gFxbzGr6cpA7o')
+    g.upload_df("2023fall_move", df_rating, '1YbU3GZq58mWu5Kl4l4gPhq96aohmk8gFxbzGr6cpA7o')
+    g.upload_df("2024summer_rating", df_rating, '1YbU3GZq58mWu5Kl4l4gPhq96aohmk8gFxbzGr6cpA7o')
 
 if __name__ == "__main__":
     main()
