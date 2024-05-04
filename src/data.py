@@ -7,25 +7,21 @@ from pgn_parser import pgn, parser
 
 # student data - will be transferred to database
 students_username = ['yaohengli',
-           'chessloverma',
            'chengliam',
-           'emmaxli',
+           'blakey0313',
            'akfunchess66',
-           
-           'willhanzhu',
-           'TLPAWN',
+
+           'Leo2016',
            'Jasminezhao777',
            'Justinzhao777',
-           'dogwater1012000',
-           'markhushen',
+           'QuantumInnovator',
+           'Jason-Ma',
            
-           'charliezienyang',
+           'chessloverma',
+           'AndyAAYY',          
            'whatwhywhywhat',
-           'ZhouYuanLi',
-           'antleo0314',
-           'AntLeoChess',
-           'carolinema77',
-           'jjjjluo']
+           'TheChessBoi9999',
+           'Gavin_ML']
 
 def lowercase_student(student_list):
     """
