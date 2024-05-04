@@ -6,6 +6,24 @@ from dateutil.relativedelta import relativedelta
 import pgn
 import pandas as pd
 
+# student data - will be transferred to database
+students_username = ['yaohengli',
+           'chengliam',
+           'blakey0313',
+           'akfunchess66',
+
+           'Leo20166',
+           'Jasminezhao777',
+           'Justinzhao777',
+           'QuantumInnovator',
+           'Jason-Ma',
+           
+           'chessloverma',
+           'AndyAAYY',          
+           'whatwhywhywhat',
+           'TheChessBoi9999',
+           'Gavin_ML']
+
 def get_user_stats(username, 
                    user_agent = {'User-Agent': 'username: tianminlyu, email: tianminlyu@gmail.com'}):
     """
@@ -45,9 +63,10 @@ def get_user_rapid_current_rating(username,
     return rapid_rating, retrive_time
 
 def rating_collect(student_list):
+    students = lowercase_student(students_username)
     ratings = []
     retrieve_time = []
-    for student in student_list:
+    for student in students:
         print(student)
         ratings.append(get_user_rapid_current_rating(student)[0])
         retrieve_time.append(get_user_rapid_current_rating(student)[1])
