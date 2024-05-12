@@ -20,7 +20,9 @@ students_username = ['yaohengli',
            'chessloverma',
            'AndyAAYY',          
            'whatwhywhywhat',
+           'charliezienyang',
            'TheChessBoi9999',
+           'evejyl77',
            'Gavin_ML']
 
 def lowercase_student(student_list):
