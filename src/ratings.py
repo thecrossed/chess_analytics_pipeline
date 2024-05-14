@@ -15,12 +15,15 @@ students_username = ['yaohengli',
            'Jasminezhao777',
            'Justinzhao777',
            'QuantumInnovator',
+           'Newinnovator',
            'Jason-Ma',
            
            'chessloverma',
            'AndyAAYY',          
            'whatwhywhywhat',
+           'charliezienyang',
            'TheChessBoi9999',
+           'evejyl77',
            'Gavin_ML']
 
 def get_user_stats(username, 
