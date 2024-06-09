@@ -17,6 +17,7 @@ students_username = ['yaohengli',
            'QuantumInnovator',
            'Newinnovator',
            'Jason-Ma',
+           'Dingcheng0',
            
            'chessloverma',
            'AndyAAYY',          
