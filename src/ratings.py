@@ -25,7 +25,8 @@ students_username = ['yaohengli',
            'charliezienyang',
            'TheChessBoi9999',
            'evejyl77',
-           'Gavin_ML']
+           'Gavin_ML',
+           'Vickyfenfen2019']
 
 def get_user_stats(username, 
                    user_agent = {'User-Agent': 'username: tianminlyu, email: tianminlyu@gmail.com'}):
