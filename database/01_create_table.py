@@ -9,7 +9,16 @@ conn = mysql.connector.connect(
     database = 'rcc'
 )
 
-cursor = conn.cursor()
+cursor = conn.cursor(buffered=True)
+
+sql = "DROP TABLE IF EXISTS move"
+cursor.execute(sql)
+
+sql = "DROP TABLE IF EXISTS game"
+cursor.execute(sql)
+
+sql = "DROP TABLE IF EXISTS student"
+cursor.execute(sql)
 
 sql = "DROP TABLE IF EXISTS class"
 cursor.execute(sql)
@@ -28,8 +37,6 @@ sql =   """
 
 cursor.execute(sql)
 
-sql = "DROP TABLE IF EXISTS student"
-cursor.execute(sql)
 
 sql =   """
         CREATE TABLE student (
@@ -46,8 +53,6 @@ sql =   """
 cursor.execute(sql)
 
 
-sql = "DROP TABLE IF EXISTS game"
-cursor.execute(sql)
 
 sql =   """
         CREATE TABLE game (
@@ -58,19 +63,18 @@ sql =   """
         chesscom_uuid VARCHAR(100) Not null,
         start_time timestamp,
         end_time timestamp,
-        time_control VARCHAR,
-        rated BINARY,
-        white_username VARCHAR,
+        time_control VARCHAR(100),
+        rated BINARY(3),
+        white_username VARCHAR(100),
         white_rating INT,
-        black_username VARCHAR,
+        black_username VARCHAR(100),
         black_rating INT,
         result FLOAT,
-        fen VARCHAR,
-        initial_setup VARCHAR,
+        fen VARCHAR(255),
+        initial_setup VARCHAR(255),
         white_accuracy FLOAT,
         black_accuracy FLOAT,
-        loadtime timestamp
-
+        loadtime timestamp,
         PRIMARY KEY (game_id),
         FOREIGN KEY (student_id) REFERENCES student (student_id) ON DELETE CASCADE ON UPDATE CASCADE
         );
@@ -79,15 +83,13 @@ sql =   """
 cursor.execute(sql)
 
 
-sql = "DROP TABLE IF EXISTS move"
-cursor.execute(sql)
 
 sql =   """
         CREATE TABLE move (
         game_id INT Not null,
         move_id INT Not null,
         move_number INT,
-        side VARCHAR,
+        side VARCHAR(16),
         used_time FLOAT,
         PRIMARY KEY (move_id),
         FOREIGN KEY (game_id) REFERENCES game (game_id) ON DELETE CASCADE ON UPDATE CASCADE
