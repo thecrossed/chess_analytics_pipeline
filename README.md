@@ -42,6 +42,10 @@ Generate game results for BO, BP and talented 2023 fall classes
 
 RCC club have weekly round-robin chess games for each class. Currently, teaching assistants need to visit the profile page of chess.com of each player to record the game result into a google spreadsheet. This project aims to automate the work by calling chess.com API to get the games data and log it into a csv file which teaching assistants can download from this repo and upload to the google spreadsheet. Sending game and result dataframe to [RCC_tianmin_students_games](https://docs.google.com/spreadsheets/d/1YbU3GZq58mWu5Kl4l4gPhq96aohmk8gFxbzGr6cpA7o/edit#gid=1280403112) 
 
+## Pipeline
+
+[link](https://drive.google.com/file/d/1scKuLYX9Ru3brCN58rqtqh7iPX5nqGgv/view?usp=sharing)
+
 ## Contact person
 
 tianminlyu@gmail.com
