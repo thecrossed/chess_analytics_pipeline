@@ -177,7 +177,7 @@ def game_data_collect(students_username, month = 1):
             for game in games[::-1]:
                 #print(game)
                 # need to loose the logic to include all games
-                if (game['white']['username'].lower() == student.lower() and game['black']['username'].lower() in students):
+                if (game['white']['username'].lower() == student.lower()):# and game['black']['username'].lower() in students):
                     end_time = datetime.utcfromtimestamp(game['end_time']).strftime('%Y-%m-%d %H:%M:%S')
                     print(end_time)
                     print("[w]" + student)
@@ -195,13 +195,13 @@ def game_data_collect(students_username, month = 1):
                     white_rating.append(game['white']['rating'])
                     black_rating.append(game['black']['rating'])
                     try:
-                        white_accuracy.append(game['accuracies']['white'])
-                        black_accuracy.append(game['accuracies']['black'])
+                        white_accuracy.append(float(game['accuracies']['white']))
+                        black_accuracy.append(float(game['accuracies']['black']))
                     except:
-                        white_accuracy.append('unknown')
-                        black_accuracy.append('unknown')
+                        white_accuracy.append(-1)
+                        black_accuracy.append(-1)
                     
-                elif (game['black']['username'].lower() == student.lower() and game['white']['username'].lower() in students):
+                elif (game['black']['username'].lower() == student.lower()): #and game['white']['username'].lower() in students):
                     end_time = datetime.utcfromtimestamp(game['end_time']).strftime('%Y-%m-%d %H:%M:%S')
                     print(end_time)
                     print("[w]" + game['white']['username'])
@@ -219,11 +219,11 @@ def game_data_collect(students_username, month = 1):
                     white_rating.append(game['white']['rating'])
                     black_rating.append(game['black']['rating'])
                     try:
-                        white_accuracy.append(game['accuracies']['white'])
-                        black_accuracy.append(game['accuracies']['black'])
+                        white_accuracy.append(float(game['accuracies']['white']))
+                        black_accuracy.append(float(game['accuracies']['black']))
                     except:
-                        white_accuracy.append('unknown')
-                        black_accuracy.append('unknown')
+                        white_accuracy.append(-1)
+                        black_accuracy.append(-1)
 
     print("---------")
     return end_times, white_players, black_players, time_controls, urls, results, white_rating, black_rating, white_accuracy, black_accuracy
@@ -285,7 +285,9 @@ def create_game_table(df):
 
 number_username = number_username()
 
-username_lst = return_username(number_username)
+#username_lst = return_username(1)
+
+username_lst = ['tianminlyu']
 
 game_collection = game_data_collect(username_lst)
 
