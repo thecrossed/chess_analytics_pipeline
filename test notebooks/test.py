@@ -8,6 +8,7 @@ from datetime import datetime
 import json
 from dateutil.relativedelta import relativedelta
 import pandas as pd
+from pgn_parser import pgn, parser
 
 # Function call to get DB password ino a local varaiable  
 db_password = conn.access_secret_version('rcc-game-result', 'cloudsql_pwd','1')
@@ -275,29 +276,160 @@ def create_game_table(df):
         db_conn.commit()
         db_conn.close()
         # insert statement (DML statement for data load)
-        """
-        insert_stmt = sqlalchemy.text(
-        "INSERT INTO basic_dtls VALUES (1, 'Jack')")
-        db_conn.execute(insert_stmt)
+
+
+def latest_game(username):
+    """
+    return the timestamp of the latest game played of the username
+    """
+    with pool.connect() as db_conn:
+        
+        # select table student_chess_com
+        query = """SELECT max(end_time) as latest_end_time
+                    FROM games
+                    WHERE white_player_username = '{username}' OR black_player_username = '{username}';
+                """.format(username = username)
+        result = db_conn.execute(sqlalchemy.text(query)).fetchall()
+        # Do something with the results
+        for row in result:
+            time_latest = row[0]
+            #time_extratced = time_latest_str.split(",")[0]
+            return time_latest
+            print(time_latest)
+            print(type(time_latest))
+
+def move_data_collect(students_username, month = 1):
+    """
+    collect move data for each game from the json raw data -
+
+    """
+    white_players = []
+    black_players = []
+    end_times = []
+    urls = []
+    move_num = []
+    move = []
+    clk = []
+    
+    students = lowercase_student(students_username)
+    for student in students:
+        print(student.upper())
+        archives = get_user_archives(student,2)
+        #print(archives)
+        for archive in archives[::-1]:
+            games = get_archive_games(archive)
+            for game in games[::-1]:
+                #print(game)
+                if (game['white']['username'].lower() == student.lower()): # and game['black']['username'].lower() in students):
+                    url = game['url']
+                    end_time = datetime.utcfromtimestamp(game['end_time']).strftime('%Y-%m-%d %H:%M:%S')
+                    moves = parser.parse(game['pgn'] , actions=pgn.Actions())
+                    move_text = moves.movetext
+                    for i in range(len(move_text) - 1):
+                        if i % 2 == 0:
+                            white_players.append(student.lower())
+                            black_players.append(game['black']['username'].lower())
+                            move_num.append( int(i / 2) + 1 )
+                            move.append(str(move_text[i]).split("{")[0].split(".")[-1])
+                            clk.append(str(move_text[i]).split("%clk ")[-1].split("]}")[0])
+                            urls.append(url)
+                            end_times.append(end_time)
+                        else:
+                            white_players.append(student.lower())
+                            black_players.append(game['black']['username'].lower())
+                            move_num.append( int(i / 2) + 1 )
+                            move.append(str(move_text[i]).split("{")[0].split("...")[-1])
+                            clk.append(str(move_text[i]).split("%clk ")[-1].split("]}")[0])
+                            urls.append(url)
+                            end_times.append(end_time)
+                    
+                elif (game['black']['username'].lower() == student.lower()): # and game['white']['username'].lower() in students):
+                    url = game['url']
+                    end_time = datetime.utcfromtimestamp(game['end_time']).strftime('%Y-%m-%d %H:%M:%S')
+                    moves = parser.parse(game['pgn'] , actions=pgn.Actions())
+                    move_text = moves.movetext
+                    for i in range(len(move_text) - 1):
+                        if i % 2 == 0:
+                            white_players.append(game['white']['username'].lower())
+                            black_players.append(student.lower())
+                            move_num.append( int(i / 2) + 1 )
+                            move.append(str(move_text[i]).split("{")[0].split(".")[-1])
+                            clk.append(str(move_text[i]).split("%clk ")[-1].split("]}")[0])
+                            urls.append(url)
+                            end_times.append(end_time)
+                        else:
+                            white_players.append(game['white']['username'].lower())
+                            black_players.append(student.lower())
+                            move_num.append( int(i / 2) + 1 )
+                            move.append(str(move_text[i]).split("{")[0].split("...")[-1])
+                            clk.append(str(move_text[i]).split("%clk ")[-1].split("]}")[0])
+                            urls.append(url)
+                            end_times.append(end_time)
+
+    print("---------")
+    return white_players, black_players, move_num, move, clk, urls, end_times
+
+def to_pandas_move(fetched_data):
+    """
+    Import fetched game data into a pandas dataframe
+    
+    and then sort and drop duplicates
+    """
+    df = pd.DataFrame()
+    df['white_username'] = fetched_data[0]
+    df['black_username'] = fetched_data[1]
+    df['move_num'] = fetched_data[2]
+    df['move'] = fetched_data[3]
+    df['clk'] = fetched_data[4]
+    df['urls'] = fetched_data[5]
+    df['end_time'] = fetched_data[6]
+    df = df.astype('str')
+    df['move_num'] = df['move_num'].astype('int')
+    df = df.drop_duplicates()
+    df = df.sort_values(by = ['end_time','move_num'], ascending = [False,True])
+    
+    return df
+
+def create_move_table(df):
+    with pool.connect() as db_conn:
+        
+        # Drop Table
+        drop_query = "DROP TABLE IF EXISTS moves"
+        db_conn.execute(sqlalchemy.text(drop_query))
+        # Create Table
+        create_query = """
+                       CREATE TABLE moves(white_username VARCHAR(128), 
+                                          black_username VARCHAR(128),
+                                          move_num INT,
+                                          move VARCHAR(64),
+                                          clk VARCHAR(64),
+                                          urls VARCHAR(255),
+                                          end_time TIMESTAMP)
+                       """
+        db_conn.execute(sqlalchemy.text(create_query))
+        df.to_sql(name='moves',con=db_conn,if_exists='append',index = False)
         db_conn.commit()
-        """
+        db_conn.close()
 
 
-number_username = number_username()
+#number_username = number_username()
 
 #username_lst = return_username(1)
 
 username_lst = ['tianminlyu']
 
-game_collection = game_data_collect(username_lst)
+# get the games from the latest 1 months
+#game_collection = game_data_collect(username_lst, month = 1)
 
-game_df = to_pandas_df(game_collection)
+#game_df = to_pandas_df(game_collection)
 
-print(game_df.head(1))
+#print(game_df.head(1))
 
-create_game_table(game_df)
-
-
-
+#create_game_table(game_df)
 
 
+move_data = move_data_collect(username_lst)
+move_df = to_pandas_move(move_data)
+print(move_df.head(1))
+
+create_move_table(move_df)
