@@ -428,8 +428,8 @@ username_lst = ['tianminlyu']
 #create_game_table(game_df)
 
 
-move_data = move_data_collect(username_lst)
-move_df = to_pandas_move(move_data)
-print(move_df.head(1))
+#move_data = move_data_collect(username_lst)
+#move_df = to_pandas_move(move_data)
+#print(move_df.head(1))
 
-create_move_table(move_df)
+#create_move_table(move_df)
