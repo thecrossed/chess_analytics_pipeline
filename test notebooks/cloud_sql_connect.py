@@ -57,27 +57,29 @@ pool = sqlalchemy.create_engine(
 
 
 # interact with Cloud SQL database using connection pool
-with pool.connect() as db_conn:
+def insert_row():
+    with pool.connect() as db_conn:
+        
+        # Drop Table
+        drop_query = "DROP TABLE IF EXISTS basic_dtls"
+        db_conn.execute(sqlalchemy.text(drop_query))
+        # Create Table
+        create_query = "CREATE TABLE basic_dtls(idn INT, name VARCHAR(200))"
+        db_conn.execute(sqlalchemy.text(create_query))
     
-    # Drop Table
-    drop_query = "DROP TABLE IF EXISTS basic_dtls"
-    db_conn.execute(sqlalchemy.text(drop_query))
-    # Create Table
-    create_query = "CREATE TABLE basic_dtls(idn INT, name VARCHAR(200))"
-    db_conn.execute(sqlalchemy.text(create_query))
-
-    # insert statement (DML statement for data load)
-    insert_stmt = sqlalchemy.text(
-    "INSERT INTO basic_dtls VALUES (1, 'Jack')")
-    db_conn.execute(insert_stmt)
-    db_conn.commit()
-
-    # query database
-    result = db_conn.execute(sqlalchemy.text("SELECT * from basic_dtls")).fetchall()
-
-    # Do something with the results
-    for row in result:
-        print(row)
-
-    # Dropping Table
-    # db_conn.execute(sqlalchemy.text("DROP TABLE basic_dtls"))
+        # insert statement (DML statement for data load)
+        insert_stmt = sqlalchemy.text(
+        "INSERT INTO basic_dtls VALUES (1, 'Jack')")
+        db_conn.execute(insert_stmt)
+        db_conn.commit()
+    
+        # query database
+        result = db_conn.execute(sqlalchemy.text("SELECT * from basic_dtls")).fetchall()
+    
+        # Do something with the results
+        for row in result:
+            print(row)
+    
+        # Dropping Table
+        # db_conn.execute(sqlalchemy.text("DROP TABLE basic_dtls"))
+#insert_row()
