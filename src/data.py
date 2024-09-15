@@ -82,6 +82,7 @@ def game_data_collect():
                     print("[w]" + student)
                     print("[b]" + game['black']['username'])
                     print("time control: " + game['time_control'])
+                    print(game['pgn'])
                     print(game['pgn'].split("\n")[-2].split(" ")[-1]) # result
                     print("          ")
                     
@@ -106,6 +107,7 @@ def game_data_collect():
                     print("[w]" + game['white']['username'])
                     print("[b]" + student)
                     print("time control: " + game['time_control'])
+                    print(game['pgn'])
                     print(game['pgn'].split("\n")[-2].split(" ")[-1])
                     print("          ")
                     
