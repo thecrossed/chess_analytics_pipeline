@@ -6,29 +6,32 @@ from dateutil.relativedelta import relativedelta
 from pgn_parser import pgn, parser
 
 # student data - will be transferred to database
-students_username = ['yaohengli',
+students_username = [
+           'yaohengli',
            'chengliam',
            'blakey0313',
            'akfunchess66',
+           'leolren', 
+           'ArthurJin',
+           'terryjmoon',
+           'jingyinghan',
+           'Ethanlu001',
 
-           'Leo20166',
            'Jasminezhao777',
            'Justinzhao777',
-           'QuantumInnovator',
-           'Spade',
-           'Jason-Ma',
            'Dingcheng0',
            'drymerrymagician',
            'sweetpotato48',
            
            'chessloverma',
-           'AndyAAYY',          
-           'whatwhywhywhat',
-           'charliezienyang',
-           'TheChessBoi9999',
            #'evejyl77',
            'Gavin_ML',
-           'Vickyfenfen2019']
+           'VickieNickie',
+           'EricLangFeng',
+           'Ella_2015_ella',
+           'Elsawang0112',
+           'JaydenW0403'
+                    ]
 
 def lowercase_student(student_list):
     """
