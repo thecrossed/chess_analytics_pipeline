@@ -3,7 +3,7 @@ name: run main.py
 on:
   # Triggers the workflow every 0 am
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0 0 1 * *"
   push:
 
 env:
