@@ -6,28 +6,32 @@ from dateutil.relativedelta import relativedelta
 import pandas as pd
 
 # student data - will be transferred to database
-students_username = ['yaohengli',
+students_username = [
+           'yaohengli',
            'chengliam',
            'blakey0313',
            'akfunchess66',
+           'leolren', 
+           'ArthurJin',
+           'terryjmoon',
+           'jingyinghan',
+           'Ethanlu001',
 
-           'Leo20166',
            'Jasminezhao777',
            'Justinzhao777',
-           'QuantumInnovator',
-           'Spade',
-           'Jason-Ma',
+           'Dingcheng0',
            'drymerrymagician',
            'sweetpotato48',
            
            'chessloverma',
-           'AndyAAYY',          
-           'whatwhywhywhat',
-           'charliezienyang',
-           'TheChessBoi9999',
            #'evejyl77',
            'Gavin_ML',
-           'Vickyfenfen2019']
+           'VickieNickie',
+           'EricLangFeng',
+           'Ella_2015_ella',
+           'Elsawang0112',
+           'JaydenW0403'
+]
 
 def get_user_stats(username, 
                    user_agent = {'User-Agent': 'username: tianminlyu, email: tianminlyu@gmail.com'}):
